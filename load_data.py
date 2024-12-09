@@ -10,11 +10,13 @@ import h5py
 import numpy as np
 import matplotlib.pyplot as plt
 
-''' Import Helper Function for reading TPC5 Files '''
+''' Import Custom Helper Function for reading TPC5 Files '''
 import tpc5
 
+filename = './triggered_test.tpc5'
 
-f = h5py.File("triggered_test.tpc5", "r")
+
+f = h5py.File(filename, "r")
 
 fig = plt.figure()
 fig.suptitle('Imported Tpc5 File', fontsize=14, fontweight='bold')
@@ -24,7 +26,9 @@ TimeScale = 1
 ''' Get Data scaled int voltage from channel 1 '''
 ch = 1
 ch1 = tpc5.getChannelName(f, 1)
-unit = '[ ' + tpc5.getPhysicalUnit(f,1) + ' ]'
+unit = f'[ {tpc5.getPhysicalUnit(f,1)} ]'
+
+
 for block in range(1, 5):
     data = tpc5.getVoltageData(f, ch, block)
     TriggerTime = tpc5.getTriggerTime(f,1,block)

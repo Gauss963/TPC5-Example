@@ -84,3 +84,11 @@ and run the example by
 ```bash
 python3 ./load_data.py
 ```
+
+## ValueError
+
+You may encounter the error like this
+
+`ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject`
+
+Just open a new conda environment and install the latest version of h5py and numpy.
