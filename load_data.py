@@ -16,25 +16,25 @@ import tpc5
 filename = './triggered_test.tpc5'
 
 
-f = h5py.File(filename, "r")
+file_instance = h5py.File(filename, "r")
 
 fig = plt.figure()
-fig.suptitle('Imported Tpc5 File', fontsize=14, fontweight='bold')
+fig.suptitle('Imported Tpc5 File', fontsize = 14, fontweight = 'bold')
 ''' Scale x Axis to ms '''
 TimeScale = 1
 
 ''' Get Data scaled int voltage from channel 1 '''
 ch = 1
-ch1 = tpc5.getChannelName(f, 1)
-unit = f'[ {tpc5.getPhysicalUnit(f,1)} ]'
+ch1 = tpc5.getChannelName(file_instance, 1)
+unit = f'[ {tpc5.getPhysicalUnit(file_instance, 1)} ]'
 
 
 for block in range(1, 5):
-    data = tpc5.getVoltageData(f, ch, block)
-    TriggerTime = tpc5.getTriggerTime(f,1,block)
-    TriggerSample = tpc5.getTriggerSample(f,1,block)
-    SamplingRate  = tpc5.getSampleRate(f,1,block)
-    RecTimeString = tpc5.getStartTime(f,1,block)
+    data = tpc5.getVoltageData(file_instance, ch, block)
+    TriggerTime = tpc5.getTriggerTime(file_instance, 1, block)
+    TriggerSample = tpc5.getTriggerSample(file_instance, 1, block)
+    SamplingRate  = tpc5.getSampleRate(file_instance, 1, block)
+    RecTimeString = tpc5.getStartTime(file_instance, 1, block)
     RecTimeList   = RecTimeString.split('T',1)
     RecDate       = RecTimeList[0]
     TimeListe     = RecTimeList[1].split('.',1)
@@ -50,11 +50,11 @@ for block in range(1, 5):
     else:
         label = 'event %d' % (block - 1)
     plt.plot(t, data, label=label)
-f.close
+file_instance.close
 
 
 
-plt.legend(framealpha=0.5)
+plt.legend(framealpha = 0.5)
 
 if TimeScale == 1: 
     plt.xlabel('time (s)')
@@ -64,9 +64,8 @@ elif TimeScale == 1000000:
     plt.xlabel('time (us)')
 
 plt.ylabel(unit)
-
 plt.title('Recording Time: ' + RecDate + ' ' + RecTime)
-
 plt.grid(True)
-
+plt.tight_layout()
+plt.savefig(f'./plot/{filename}_plot.pdf', dpi = 300)
 plt.show()
