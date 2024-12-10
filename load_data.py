@@ -11,7 +11,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 ''' Import Custom Helper Function for reading TPC5 Files '''
-import tpc5
+import TPC5
 
 filename = './triggered_test.tpc5'
 
@@ -25,16 +25,16 @@ TimeScale = 1
 
 ''' Get Data scaled int voltage from channel 1 '''
 ch = 1
-ch1 = tpc5.getChannelName(file_instance, 1)
-unit = f'[ {tpc5.getPhysicalUnit(file_instance, 1)} ]'
+ch1 = TPC5.getChannelName(file_instance, 1)
+unit = f'[ {TPC5.getPhysicalUnit(file_instance, 1)} ]'
 
 
 for block in range(1, 5):
-    data = tpc5.getVoltageData(file_instance, ch, block)
-    TriggerTime = tpc5.getTriggerTime(file_instance, 1, block)
-    TriggerSample = tpc5.getTriggerSample(file_instance, 1, block)
-    SamplingRate  = tpc5.getSampleRate(file_instance, 1, block)
-    RecTimeString = tpc5.getStartTime(file_instance, 1, block)
+    data = TPC5.getVoltageData(file_instance, ch, block)
+    TriggerTime = TPC5.getTriggerTime(file_instance, 1, block)
+    TriggerSample = TPC5.getTriggerSample(file_instance, 1, block)
+    SamplingRate  = TPC5.getSampleRate(file_instance, 1, block)
+    RecTimeString = TPC5.getStartTime(file_instance, 1, block)
     RecTimeList   = RecTimeString.split('T',1)
     RecDate       = RecTimeList[0]
     TimeListe     = RecTimeList[1].split('.',1)

@@ -5,20 +5,36 @@
 
 
 ''' Get Raw Dataset Block'''
+# def getDataSetName(channel, block = 1):
+#     blockString   = "%08d" % block
+#     channelString = "%08d" % channel
+#     name = '/measurements/00000001/channels/' + channelString + '/blocks/' + blockString + '/raw'
+#     return name
+
+# def getChannelGroupName(channel):
+#     channelString = "%08d" % channel   
+#     return '/measurements/00000001/channels/' + channelString +'/'
+
+# def getBlockName(channel, block):
+#     blockString   = "%08d" % block
+#     channelString = "%08d" % channel
+#     name = '/measurements/00000001/channels/' + channelString + '/blocks/' + blockString + '/'
+#     return name
+
 def getDataSetName(channel, block = 1):
     blockString   = "%08d" % block
     channelString = "%08d" % channel
-    name = '/measurements/00000001/channels/' + channelString + '/blocks/' + blockString + '/raw'
+    name = f'/measurements/00000001/channels/{channelString}/blocks/{blockString}/raw'
     return name
 
 def getChannelGroupName(channel):
     channelString = "%08d" % channel   
-    return '/measurements/00000001/channels/' + channelString +'/'
+    return f'/measurements/00000001/channels/{channelString}/'
 
 def getBlockName(channel, block):
     blockString   = "%08d" % block
     channelString = "%08d" % channel
-    name = '/measurements/00000001/channels/' + channelString + '/blocks/' + blockString + '/'
+    name = f'/measurements/00000001/channels/{channelString}/blocks/{blockString}/'
     return name
 
 def getVoltageData(fileRef, channel, block = 1):
